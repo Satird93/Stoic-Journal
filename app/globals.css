@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Colors */
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --text: #0A0A0A;
+    --text-secondary: #525252;
+    --accent: #FF6B35;
+    --accent-hover: #E55A2B;
+    --border: #0A0A0A;
+    --shadow: #0A0A0A;
+
+    /* Typography */
+    --font-space-grotesk: 'Space Grotesk', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+
+    /* Transitions */
+    --transition-fast: 0.15s;
+    --transition-base: 0.2s;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-inter);
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
