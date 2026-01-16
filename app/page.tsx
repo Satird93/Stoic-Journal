@@ -11,9 +11,15 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [quote, setQuote] = useState(() => getQuoteForDate(currentDate))
+  const [userEntry, setUserEntry] = useState('')
 
   useEffect(() => {
     setQuote(getQuoteForDate(currentDate))
+
+    // Загружаем запись пользователя из localStorage
+    const dateKey = getISODate(currentDate)
+    const entry = localStorage.getItem(`journal_${dateKey}`)
+    setUserEntry(entry ? JSON.parse(entry).content : '')
   }, [currentDate])
 
   const goToPreviousDay = () => {
@@ -82,9 +88,13 @@ export default function Home() {
         </Button>
       </div>
 
-      <DailyQuote quote={quote} />
+      <DailyQuote quote={quote} userEntry={userEntry} />
 
-      <JournalEntry date={getISODate(currentDate)} quoteId={quote.id} />
+      <JournalEntry
+        date={getISODate(currentDate)}
+        quoteId={quote.id}
+        onSave={(entry) => setUserEntry(entry.content)}
+      />
     </div>
   )
 }
